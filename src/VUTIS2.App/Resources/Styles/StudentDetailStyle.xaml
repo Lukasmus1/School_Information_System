@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:texts="clr-namespace:VUTIS2.App.Resources.Texts">
+
+    <Style x:Key="StudentDetailLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="60" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="StudentSubjectLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="50" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="End"/>
+        <Setter Property="LineBreakMode" Value="WordWrap"/>
+    </Style>
+
+    <Style x:Key="AddSubjectLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="Text" Value="{x:Static texts:RandomTexts.AddSubjectLabel}" />
+    </Style>
+</ResourceDictionary>

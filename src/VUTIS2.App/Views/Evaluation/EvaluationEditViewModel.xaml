@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:texts="clr-namespace:VUTIS2.App.Resources.Texts"
+                       xmlns:vm="clr-namespace:VUTIS2.App.ViewModels"
+                       xmlns:m="clr-namespace:VUTIS2.BL.Models;assembly=VUTIS2.BL"
+                       xmlns:views="clr-namespace:VUTIS2.App.Views"
+                       x:DataType="vm:EvaluationEditViewModel"
+                       x:Class="VUTIS2.App.Views.Evaluation.EvaluationEditView"
+                       x:Name="EvaluationEditViewRoot">
+
+    <Grid ColumnDefinitions="7*,3*" ColumnSpacing="10"
+          Margin="30,30,30,30">
+
+        <VerticalStackLayout Spacing="10">
+            <Grid ColumnDefinitions="*,5*,*" ColumnSpacing="10">
+                <Image Grid.Column="0"
+                       Source="{Binding Student.PhotoUrl, TargetNullValue='students_picture.png'}" />
+
+                <HorizontalStackLayout Spacing="10"
+                                       Grid.Column="1">
+                    <Label Grid.Column="1"
+                           Text="{Binding Student.FirstName}"
+                           Style="{StaticResource Heading}" />
+
+                    <Label Grid.Column="2"
+                           Text="{Binding Student.LastName}"
+                           Style="{StaticResource Heading}" />
+                </HorizontalStackLayout>
+
+                <Button Grid.Column="3"
+                        Command="{Binding Source={x:Reference EvaluationEditViewRoot}, Path=BindingContext.RemoveStudentCommand}"
+                        Text="Unbind Student" />
+            </Grid>
+
+            <Label Text="{x:Static texts:EvaluationEditViewTexts.Evaluation}"
+                   Style="{StaticResource Parent}" />
+            <Entry Text="{Binding Evaluation.Points}" />
+
+            <Label Text="{x:Static texts:EvaluationEditViewTexts.Description}"
+                   Style="{StaticResource Parent}" />
+            <Entry Text="{Binding Evaluation.Description}" />
+
+            <Grid ColumnDefinitions="2*,3*" ColumnSpacing="10">
+                <Button Grid.Column="0"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource SaveButton}" />
+
+                <Button Grid.Column="1"
+                        Style="{StaticResource CancelButton}"
+                        Command="{Binding CancelCommand}" />
+
+            </Grid>
+        </VerticalStackLayout>
+
+        <Grid Grid.Column="1"
+              RowDefinitions="auto, *">
+            <Label Text="Bind Student"
+                   Grid.Row="0"
+                   Style="{StaticResource Parent}" />
+
+            <CollectionView ItemsSource="{Binding Students}"
+                            Grid.Row="1">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:StudentListModel">
+                        <Frame IsClippedToBounds="True"
+                               HeightRequest="150">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference EvaluationEditViewRoot}, Path=BindingContext.AddStudentCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="*,4*" ColumnSpacing="10"
+                                  RowDefinitions="*,*">
+                                <Image Grid.Column="0" Grid.Row="0"
+                                       Grid.RowSpan="2"
+                                       Source="{Binding PhotoUrl, TargetNullValue='students_picture.png'}" />
+
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding FirstName}"
+                                       Style="{StaticResource Parent}" />
+
+                                <Label Grid.Column="1" Grid.Row="1"
+                                       Text="{Binding LastName}"
+                                       Style="{StaticResource Parent}" />
+
+
+                            </Grid>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+
+
+</views:ContentPageBase>

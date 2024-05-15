@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:VUTIS2.App.ViewModels"
+                       xmlns:views="clr-namespace:VUTIS2.App.Views"
+                       x:Class="VUTIS2.App.Views.MainPage"
+                       x:DataType="vm:MainPageViewModel"
+                       xmlns:text="clr-namespace:VUTIS2.App.Resources.Texts"
+                       x:Name="MainPageRoot"
+                       Background="Black">
+
+
+    <Grid ColumnDefinitions="*,*" RowDefinitions="100, 3*, 4*" ColumnSpacing="20" Margin="30,30,30,30">
+        <Label Text="{x:Static text:MainPage.WelcomeView}"
+               VerticalOptions="Start"
+               HorizontalOptions="Start"
+               Grid.Row="0"
+               Grid.Column="0"
+               Style="{StaticResource Titleline}" />
+
+        <Frame Grid.Row="1"
+               Grid.Column="0"
+               Style="{StaticResource ModuleSelect}">
+
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.GoToSubjectsCommand}" />
+            </Frame.GestureRecognizers>
+
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="subjects_image.jpg" />
+                <Label Text="Subjects"
+                       TextColor="Black"
+                       Style="{StaticResource Heading}" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Grid.Row="1"
+               Grid.Column="1"
+               Style="{StaticResource ModuleSelect}">
+
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.GoToStudentsCommand}" />
+            </Frame.GestureRecognizers>
+
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="students_picture.png" />
+                <Label Text="Students"
+                       Grid.Row="0"
+                       TextColor="Black"
+                       Style="{StaticResource Heading}" />
+            </HorizontalStackLayout>
+        </Frame>
+    </Grid>
+
+
+</views:ContentPageBase>

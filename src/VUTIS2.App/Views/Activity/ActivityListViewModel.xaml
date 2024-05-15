@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:texts="clr-namespace:VUTIS2.App.Resources.Texts"
+                       xmlns:vm="clr-namespace:VUTIS2.App.ViewModels"
+                       xmlns:m="clr-namespace:VUTIS2.BL.Models;assembly=VUTIS2.BL"
+                       xmlns:views="clr-namespace:VUTIS2.App.Views"
+                       x:DataType="vm:ActivityListViewModel"
+                       x:Class="VUTIS2.App.Views.Activity.ActivityListView"
+                       x:Name="ActivityListViewRoot">
+
+
+    <Grid RowDefinitions="auto, auto, *" RowSpacing="10"
+          Margin="30,30,30,30">
+
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10"
+              Grid.Row="0">
+            <Button Grid.Column="0"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.GoToCreateCommand}"
+                    Text="Add Activity" />
+
+            <Button Grid.Column="1"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.SortByStartTimeCommand}"
+                    Text="Sort by Start Time" />
+
+            <Button Grid.Column="2"
+                    Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.SortByEndTimeCommand}"
+                    Text="Sort by End Time" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10"
+              RowDefinitions="auto, auto" RowSpacing="10"
+              Grid.Row="1">
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="Start Time:" />
+                <HorizontalStackLayout Spacing="10">
+                    <DatePicker Date="{Binding StartTimeDate}"
+                                Format="yyyy-MM-dd" />
+                    <TimePicker Time="{Binding StartTimeTimeSpan}"
+                                Format="HH-mm" />
+                    <VerticalStackLayout>
+                        <Label Text="After" />
+                        <CheckBox IsChecked="{Binding FilterStartAscending}" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="1">
+                <Label Text="End Time:" />
+                <HorizontalStackLayout Spacing="10">
+                    <DatePicker Date="{Binding EndTimeDate}"
+                                Format="yyyy-MM-dd" />
+                    <TimePicker Time="{Binding EndTimeTimeSpan}"
+                                Format="HH-mm" />
+                    <VerticalStackLayout>
+                        <Label Text="After" />
+                        <CheckBox IsChecked="{Binding FilterEndAscending}" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="1">
+                <Button Text="Filter by Start Time"
+                        Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.FilterByStartTimeCommand}"
+                        Grid.Column="0" />
+
+                <Button Text="Filter by End Time"
+                        Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.FilterByEndTimeCommand}"
+                        Grid.Column="1" />
+
+                <Button Text="Filter"
+                        Command="{Binding Source={x:Reference ActivityListViewRoot}, Path=BindingContext.FilterByBothCommand}"
+                        Grid.Column="2" />
+            </Grid>
+        </Grid>
+
+        <Grid ColumnDefinitions="7*,3*"
+              Grid.Row="2">
+            <CollectionView ItemsSource="{Binding Activities}"
+                            Grid.Row="2">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:ActivityListModel">
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,*,*,*"
+                                  RowDefinitions="*,*">
+
+                                <Label Grid.Column="0"
+                                       Grid.Row="0"
+                                       Grid.ColumnSpan="4"
+                                       Text="{Binding Description}"
+                                       Style="{StaticResource Parent}" />
+
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                       Text="{Binding StartTime}"
+                                       Style="{StaticResource Label}" />
+
+                                <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text="{Binding EndTime}"
+                                       Style="{StaticResource Label}" />
+
+                                <Label Grid.Column="2"
+                                       Grid.Row="1"
+                                       Text="{Binding RoomName}"
+                                       Style="{StaticResource Label}" />
+
+                                <Label Grid.Column="3"
+                                       Grid.Row="1"
+                                       Text="{Binding ActivityType}"
+                                       Style="{StaticResource Label}" />
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</views:ContentPageBase>

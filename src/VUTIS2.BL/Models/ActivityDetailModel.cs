@@ -3,15 +3,15 @@ using VUTIS2.Common.Enums;
 
 namespace VUTIS2.BL.Models;
 
-public class ActivityDetailModel : ModelBase
+public record ActivityDetailModel : ModelBase
 {
-    public required DateTime StartTime { get; init; }
-    public required DateTime EndTime { get; init; }
+    public required DateTime StartTime { get; set; }
+    public required DateTime EndTime { get; set; }
 
-    public required string RoomName { get; init; }
+    public required string RoomName { get; set; }
 
-    public required ActivityType ActivityType { get; init; }
-    public required string Description { get; init; }
+    public required ActivityType ActivityType { get; set; }
+    public required string Description { get; set; }
     public Guid SubjectId { get; set; }
     public SubjectDetailModel? Subject { get; init; }
     public ObservableCollection<EvaluationListModel>? Evaluations { get; init; } = new();

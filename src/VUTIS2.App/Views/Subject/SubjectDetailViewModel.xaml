@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:texts="clr-namespace:VUTIS2.App.Resources.Texts"
+    xmlns:vm="clr-namespace:VUTIS2.App.ViewModels"
+    xmlns:views="clr-namespace:VUTIS2.App.Views"
+    xmlns:m="clr-namespace:VUTIS2.BL.Models;assembly=VUTIS2.BL"
+    x:DataType="vm:SubjectDetailViewModel"
+    x:Class="VUTIS2.App.Views.Subject.SubjectDetailView"
+    x:Name="SubjectDetailViewRoot">
+
+    <Grid ColumnDefinitions="3*,4*,4*"
+          ColumnSpacing="10"
+          Margin="30,30,30,30">
+        <VerticalStackLayout Grid.Column="0">
+            <Label Text="{Binding Subject.Name}"
+                   Style="{StaticResource Heading}" />
+
+            <Label Text="{Binding Subject.Abbreviation}"
+                   Style="{StaticResource Parent}" />
+
+            <Button
+                Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.GoToSubjectEditCommand}"
+                Style="{StaticResource EditButton}"
+                Margin="0, 20, 0, 0" />
+        </VerticalStackLayout>
+
+        <Grid RowDefinitions="4*,3*" ColumnSpacing="10"
+              Grid.Column="1">
+            <CollectionView ItemsSource="{Binding EnrolledStudents}"
+                            Grid.Row="0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:StudentListModel">
+                        <Frame>
+                            <Grid ColumnDefinitions="*,*,*"
+                                  RowDefinitions="*,*">
+
+                                <Image Grid.Column="0" Grid.Row="0"
+                                       Grid.RowSpan="2"
+                                       Source="{Binding PhotoUrl, TargetNullValue='students_picture.png'}" />
+
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding FirstName}"
+                                       Style="{StaticResource SubjectStudentActivityLabel}" />
+
+                                <Label Grid.Column="1" Grid.Row="1"
+                                       Text="{Binding LastName}"
+                                       Style="{StaticResource SubjectStudentActivityLabel}" />
+
+                                <Button Grid.Column="2"
+                                        Grid.RowSpan="2"
+                                        Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.RemoveEnrollmentCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        Text="Remove Student" />
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CollectionView ItemsSource="{Binding Students}"
+                            Grid.Row="1">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:StudentListModel">
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.AddEnrollmentCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,*,*"
+                                  RowDefinitions="*,*">
+
+                                <Image Grid.Column="0" Grid.Row="0"
+                                       Grid.RowSpan="2"
+                                       Source="{Binding PhotoUrl, TargetNullValue='students_picture.png'}" />
+
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding FirstName}"
+                                       Style="{StaticResource SubjectStudentActivityLabel}" />
+
+                                <Label Grid.Column="1" Grid.Row="1"
+                                       Text="{Binding LastName}"
+                                       Style="{StaticResource SubjectStudentActivityLabel}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <Grid RowDefinitions="auto, auto, *" RowSpacing="10"
+              Grid.Column="2">
+            <CollectionView ItemsSource="{Binding Activities}"
+                            Grid.Row="2">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:ActivityListModel">
+                        <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.GoToActivityDetailCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="*,*,*,*"
+                                  RowDefinitions="*,*">
+
+                                <Label Grid.Column="0"
+                                       Grid.Row="0"
+                                       Grid.ColumnSpan="4"
+                                       Text="{Binding Description}"
+                                       Style="{StaticResource Parent}" />
+
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                       Text="{Binding StartTime}"
+                                       Style="{StaticResource Label}" />
+
+                                <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text="{Binding EndTime}"
+                                       Style="{StaticResource Label}" />
+
+                                <Label Grid.Column="2"
+                                       Grid.Row="1"
+                                       Text="{Binding RoomName}"
+                                       Style="{StaticResource Label}" />
+
+                                <Label Grid.Column="3"
+                                       Grid.Row="1"
+                                       Text="{Binding ActivityType}"
+                                       Style="{StaticResource Label}" />
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Grid.Row="0"
+                    Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.GoToActivityCreateCommand}"
+                    Text="Add Activity" />
+
+            <Button Grid.Row="1"
+                    Text="Show Activity List"
+                    Command="{Binding Source={x:Reference SubjectDetailViewRoot}, Path=BindingContext.GoToActivityListCommand}" />
+
+        </Grid>
+
+    </Grid>
+</views:ContentPageBase>

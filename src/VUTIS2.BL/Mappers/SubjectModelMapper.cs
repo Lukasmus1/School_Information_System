@@ -1,14 +1,12 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using System.Collections.ObjectModel;
+﻿using Microsoft.Extensions.DependencyInjection;
 using VUTIS2.BL.Models;
 using VUTIS2.DAL.Entities;
 
 namespace VUTIS2.BL.Mappers;
 
-public class SubjectModelMapper(StudentModelMapper studentModelMapper, ActivityModelMapper activityModelMapper) : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectDetailModel>
+public class SubjectModelMapper(IEnrollmentModelMapper enrollmentModelMapper, IActivityModelMapper activityModelMapper) : ModelMapperBase<SubjectEntity, SubjectListModel, SubjectDetailModel>, ISubjectModelMapper
 {
+
     public override SubjectListModel MapToListModel(SubjectEntity? entity)
         => entity is null
             ? SubjectListModel.Empty
@@ -26,7 +24,7 @@ public class SubjectModelMapper(StudentModelMapper studentModelMapper, ActivityM
                 Id = entity.Id,
                 Name = entity.Name,
                 Abbreviation = entity.Abbreviation,
-                Students = studentModelMapper.MapToListModel(entity.Students).ToObservableCollection(),
+                Enrollments = enrollmentModelMapper.MapToListModel(entity.Enrollments).ToObservableCollection(),
                 Activities = activityModelMapper.MapToListModel(entity.Activities).ToObservableCollection()
             };
     public override SubjectEntity MapToEntity(SubjectDetailModel model) => new()

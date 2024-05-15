@@ -1,9 +1,27 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+﻿using Microsoft.Extensions.DependencyInjection;
+using VUTIS2.BL.Facades;
+using VUTIS2.BL.Mappers;
+using VUTIS2.DAL.UnitOfWork;
 
 namespace VUTIS2.BL;
 
-public class BLInstaller
+public static class BLInstaller
 {
-    
+    public static IServiceCollection AddBLServices(this IServiceCollection services)
+    {
+        services.AddSingleton<IUnitOfWorkFactory, UnitOfWorkFactory>();
+        services.Scan(selector => selector
+            .FromAssemblyOf<BusinessLogic>()
+            .AddClasses(filter => filter.AssignableTo(typeof(IFacade<,,>)))
+            .AsMatchingInterface()
+            .WithSingletonLifetime());
+
+        services.Scan(selector => selector
+            .FromAssemblyOf<BusinessLogic>()
+            .AddClasses(filter => filter.AssignableTo(typeof(IModelMapper<,,>)))
+            .AsSelfWithInterfaces()
+            .WithSingletonLifetime());
+        services.AddSingleton<IServiceProvider>(provider => provider);
+        return services;
+    }
 }

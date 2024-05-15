@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:texts="clr-namespace:VUTIS2.App.Resources.Texts"
+                       xmlns:vm="clr-namespace:VUTIS2.App.ViewModels"
+                       xmlns:m="clr-namespace:VUTIS2.BL.Models;assembly=VUTIS2.BL"
+                       xmlns:views="clr-namespace:VUTIS2.App.Views"
+                       x:DataType="vm:StudentEditViewModel"
+                       x:Class="VUTIS2.App.Views.Student.StudentEditView"
+                       x:Name="StudentEditViewRoot">
+
+    <Grid Margin="30,30,30,30">
+        <VerticalStackLayout Spacing="10">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10"
+                  RowDefinitions="300">
+
+                <VerticalStackLayout Grid.Row="0"
+                                     Grid.Column="0"
+                                     Spacing="10">
+                    <Label Text="{x:Static texts:StudentEditTexts.Name}"
+                           Style="{StaticResource Parent}" />
+
+                    <Entry HorizontalOptions="Fill"
+                           Text="{Binding Student.FirstName}" />
+
+                    <Label Text="{x:Static texts:StudentEditTexts.Surname}"
+                           Style="{StaticResource Parent}" />
+
+                    <Entry HorizontalOptions="Fill"
+                           Text="{Binding Student.LastName}" />
+
+                    <Label Text="{x:Static texts:StudentEditTexts.PhotoText}"
+                           Style="{StaticResource Parent}" />
+
+                    <Entry HorizontalOptions="Fill"
+                           Text="{Binding Student.PhotoUrl}" />
+                </VerticalStackLayout>
+
+                <Image Grid.Column="1"
+                       Source="{Binding Student.PhotoUrl, TargetNullValue='students_picture.png'}" />
+
+            </Grid>
+
+            <Grid ColumnDefinitions="2*,3*" ColumnSpacing="10"
+                  Grid.Row="1">
+
+                <Button Grid.Column="0"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource SaveButton}" />
+
+                <Button Grid.Column="1"
+                        Style="{StaticResource CancelButton}"
+                        Command="{Binding CancelCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+
+</views:ContentPageBase>

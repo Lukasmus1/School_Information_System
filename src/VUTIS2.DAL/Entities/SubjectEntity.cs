@@ -9,6 +9,6 @@
 
         public ICollection<ActivityEntity> Activities { get; init; } = new List<ActivityEntity>();
 
-        public ICollection<StudentEntity> Students { get; init; } = new List<StudentEntity>();
+        public ICollection<EnrollmentEntity> Enrollments { get; init; } = new List<EnrollmentEntity>();
     }
 }

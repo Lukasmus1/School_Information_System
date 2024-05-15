@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:texts="clr-namespace:VUTIS2.App.Resources.Texts"
+                       xmlns:vm="clr-namespace:VUTIS2.App.ViewModels"
+                       xmlns:m="clr-namespace:VUTIS2.BL.Models;assembly=VUTIS2.BL"
+                       xmlns:views="clr-namespace:VUTIS2.App.Views"
+                       x:DataType="vm:SubjectEditViewModel"
+                       x:Class="VUTIS2.App.Views.Subject.SubjectEditView"
+                       x:Name="SubjectEditViewRoot">
+
+    <Grid ColumnDefinitions="7*, 3*"
+          Margin="30,30,30,30">
+
+        <VerticalStackLayout Grid.Column="0" Spacing="10">
+            <Label Text="{x:Static texts:SubjectEditTexts.Name}"
+                   Style="{StaticResource Parent}" />
+
+            <Entry HorizontalOptions="Fill"
+                   Text="{Binding Subject.Name}" />
+
+            <Label Text="{x:Static texts:SubjectEditTexts.Abbreviation}"
+                   Style="{StaticResource Parent}" />
+
+            <Entry HorizontalOptions="Fill"
+                   Text="{Binding Subject.Abbreviation}" />
+
+            <Grid ColumnDefinitions="2*,3*" ColumnSpacing="10">
+                <Button Grid.Column="0"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource SaveButton}" />
+
+                <Button Grid.Column="1"
+                        Style="{StaticResource CancelButton}"
+                        Command="{Binding CancelCommand}" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+
+</views:ContentPageBase>

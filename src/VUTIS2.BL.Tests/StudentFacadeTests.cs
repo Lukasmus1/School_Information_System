@@ -13,7 +13,7 @@ public sealed class StudentFacadeTests : FacadeTestsBase
 
     public StudentFacadeTests(ITestOutputHelper output) : base(output)
     {
-        _studentFacadeSUT = new StudentFacade(UnitOfWorkFactory, StudentModelMapper);
+        _studentFacadeSUT = new StudentFacade(UnitOfWorkFactory, StudentModelMapper, enrollmentFacade);
     }
 
     [Fact]

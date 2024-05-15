@@ -63,7 +63,7 @@ public class EvaluationFacadeTests : FacadeTestsBase
     public async Task GetById_SeededEvaluation()
     {
         var evaluation = await _evaluationFacadeSUT.GetAsync(EvaluationSeeds.SampleEvaluation1.Id);
-        DeepAssert.Equal(EvaluationModelMapper.MapToDetailModel(EvaluationSeeds.SampleEvaluation1 with {Student = null}), evaluation);
+        DeepAssert.Equal(EvaluationModelMapper.MapToDetailModel(EvaluationSeeds.SampleEvaluation1), evaluation);
     }
 
     [Fact]

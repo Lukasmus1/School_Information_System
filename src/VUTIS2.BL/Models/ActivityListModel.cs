@@ -2,7 +2,7 @@
 
 namespace VUTIS2.BL.Models;
 
-public class ActivityListModel :ModelBase
+public record ActivityListModel :ModelBase
 {
     public required string Description { get; init; }
     public required DateTime StartTime { get; init; }

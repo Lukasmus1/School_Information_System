@@ -15,7 +15,7 @@ public class ActivityFacadeTests : FacadeTestsBase
 
     public ActivityFacadeTests(ITestOutputHelper output) : base(output)
     {
-        _activityFacadeSUT = new ActivityFacade(UnitOfWorkFactory, ActivityModelMapper);
+        _activityFacadeSUT = new ActivityFacade(UnitOfWorkFactory, ActivityModelMapper, evaluationFacade);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class ActivityFacadeTests : FacadeTestsBase
     public async Task GetById_SeededActivity()
     {
         var activity = await _activityFacadeSUT.GetAsync(ActivitySeeds.SampleActivity1.Id);
-        var expected = ActivityModelMapper.MapToDetailModel(ActivitySeeds.SampleActivity1 with {Subject = null, Evaluations = new List<EvaluationEntity>()});
+        var expected = ActivityModelMapper.MapToDetailModel(ActivitySeeds.SampleActivity1);
         DeepAssert.Equal(expected, activity);
     }
 

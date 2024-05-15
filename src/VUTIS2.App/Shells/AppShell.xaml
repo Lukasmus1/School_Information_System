@@ -1,0 +1,29 @@
+<Shell
+    x:Class="VUTIS2.App.Shells.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:VUTIS2.App.Views"
+    xmlns:text="clr-namespace:VUTIS2.App.Resources.Texts"
+    x:Name="AppShellRoot"
+    FlyoutBehavior="Disabled"
+    Title="VUTIS2"
+    Background="{StaticResource Gray100}">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="mainpage" />
+
+    <Shell.TitleView>
+        <HorizontalStackLayout>
+            <Button Text="{x:Static text:AppShellTexts.StudentsView}"
+                    Style="{StaticResource ShellButtonStyle}"
+                    Command="{Binding Source ={x:Reference AppShellRoot}, Path = GoToStudentsCommand}" />
+
+            <Button Text="{x:Static text:AppShellTexts.SubjectsView}"
+                    Style="{StaticResource ShellButtonStyle}"
+                    Command="{Binding Source ={x:Reference AppShellRoot}, Path = GoToSubjectsCommand}" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
+
+</Shell>

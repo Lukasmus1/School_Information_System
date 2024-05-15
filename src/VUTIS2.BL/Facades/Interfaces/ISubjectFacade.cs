@@ -1,12 +1,13 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using VUTIS2.BL.Models;
+﻿using VUTIS2.BL.Models;
 using VUTIS2.DAL.Entities;
 
 namespace VUTIS2.BL.Facades;
 
 public interface ISubjectFacade : IFacade<SubjectEntity, SubjectListModel, SubjectDetailModel>
 {
-
+    public Task<IEnumerable<SubjectListModel>> SearchAsync(string name);
+    IEnumerable<SubjectListModel> GetOrderedByNameAsc(List<SubjectListModel> subjects);
+    IEnumerable<SubjectListModel> GetOrderedByNameDesc(List<SubjectListModel> subjects);
+    IEnumerable<SubjectListModel> GetOrderedByAbbreviationAsc(List<SubjectListModel> subjects);
+    IEnumerable<SubjectListModel> GetOrderedByAbbreviationDesc(List<SubjectListModel> subjects);
 }

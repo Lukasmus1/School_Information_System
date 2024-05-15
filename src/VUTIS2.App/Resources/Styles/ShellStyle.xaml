@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style x:Key="ShellButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource ShellButtonText}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource ShellButtonBackground}" />
+        <Setter Property="Margin" Value="10, 0" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+    </Style>
+</ResourceDictionary>

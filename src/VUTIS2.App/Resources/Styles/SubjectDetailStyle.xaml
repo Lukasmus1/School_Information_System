@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style x:Key="SubjectDetailAbbr" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="BackgroundColor" Value="Black"/>
+    </Style>
+
+    <Style x:Key="SubjectDetailLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="60" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="BackgroundColor" Value="Black"/>
+    </Style>
+
+    <Style x:Key="SubjectStudentActivityLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource White}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontFamily" Value="MonsterratMedium" />
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+    </Style>
+</ResourceDictionary>

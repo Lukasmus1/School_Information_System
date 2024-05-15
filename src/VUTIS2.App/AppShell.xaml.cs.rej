@@ -1,0 +1,23 @@
+diff a/src/VUTIS2.App/AppShell.xaml.cs b/src/VUTIS2.App/AppShell.xaml.cs	(rejected hunks)
+@@ -1,10 +0,15 @@
+-﻿namespace VUTIS2.App
++﻿using VUTIS2.App.Services;
++
++namespace VUTIS2.App;
++
++public partial class AppShell
+ {
+-    public partial class AppShell : Shell
++    private readonly INavigationService _navigationService;
++
++    public AppShell(INavigationService navigationService)
+     {
+-        public AppShell()
+-        {
+-            InitializeComponent();
+-        }
++        _navigationService = navigationService;
++
++        InitializeComponent();
+     }
+ }

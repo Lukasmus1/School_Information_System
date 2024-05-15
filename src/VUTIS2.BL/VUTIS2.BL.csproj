@@ -7,6 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+      <PackageReference Include="Scrutor" Version="4.2.2" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\VUTIS2.Common\VUTIS2.Common.csproj" />
       <ProjectReference Include="..\VUTIS2.DAL\VUTIS2.DAL.csproj" />
     </ItemGroup>

@@ -9,6 +9,6 @@
 
         public string? PhotoUrl { get; set; }
 
-        public ICollection<SubjectEntity> Subjects { get; init; } = new List<SubjectEntity>();
+        public ICollection<EnrollmentEntity> Enrollments { get; init; } = new List<EnrollmentEntity>();
     }
 }

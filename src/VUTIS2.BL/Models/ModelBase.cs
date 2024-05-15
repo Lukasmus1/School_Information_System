@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace VUTIS2.BL.Models;
 
-public class ModelBase : INotifyPropertyChanged, IModel
+public record ModelBase : INotifyPropertyChanged, IModel
 {
     public Guid Id { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;

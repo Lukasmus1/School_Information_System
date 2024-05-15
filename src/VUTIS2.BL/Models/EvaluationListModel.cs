@@ -1,9 +1,6 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+﻿namespace VUTIS2.BL.Models;
 
-namespace VUTIS2.BL.Models;
-
-public class EvaluationListModel : ModelBase
+public record EvaluationListModel : ModelBase
 {
     public required int Points { get; init; }
     public string? Description { get; init; }

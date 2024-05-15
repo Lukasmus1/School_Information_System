@@ -1,7 +1,4 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-using System.Collections;
+﻿using System.Collections;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using VUTIS2.BL.Mappers;
@@ -60,14 +57,28 @@ public abstract class
             : ModelMapper.MapToDetailModel(entity);
     }
 
+    public virtual async Task<TListModel?> GetAsyncList(Guid id)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+
+        IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
+
+        foreach (string includePath in IncludesNavigationPathDetail)
+        {
+            query = query.Include(includePath);
+        }
+
+        TEntity? entity = await query.SingleOrDefaultAsync(e => e.Id == id).ConfigureAwait(false);
+
+        return ModelMapper.MapToListModel(entity);
+    }
+
     // Always use paging in production
     public virtual async Task<IEnumerable<TListModel>> GetAsync()
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        List<TEntity> entities = await uow
-            .GetRepository<TEntity, TEntityMapper>()
-            .Get()
-            .ToListAsync().ConfigureAwait(false);
+        IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
+        List<TEntity> entities = await query.ToListAsync().ConfigureAwait(false);
 
         return ModelMapper.MapToListModel(entities);
     }
